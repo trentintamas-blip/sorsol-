@@ -1,0 +1,287 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!doctype html>\
+<html lang="hu">\
+<head>\
+  <meta charset="utf-8" />\
+  <meta name="viewport" content="width=device-width,initial-scale=1" />\
+  <title>Di\'e1k Randomizer \'97 Egyf\'e1jl\'fa HTML</title>\
+  <style>\
+    :root\{--bg:#0f172a;--card:#0b1220;--accent:#3b82f6;--muted:#94a3b8;--glass:rgba(255,255,255,0.03)\}\
+    html,body\{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#e6eef8;background:linear-gradient(180deg,#041026 0%, #07203a 100%);-webkit-font-smoothing:antialiased\}\
+    .wrap\{max-width:980px;margin:28px auto;padding:20px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.7)\}\
+    header\{display:flex;align-items:center;gap:12px\}\
+    h1\{font-size:20px;margin:0\}\
+    p.lead\{margin:6px 0 18px;color:var(--muted)\}\
+    .grid\{display:grid;grid-template-columns:1fr 360px;gap:18px\}\
+    textarea\{width:100%;min-height:220px;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:var(--card);color:inherit;resize:vertical\}\
+    label\{font-size:13px;color:var(--muted)\}\
+    .controls\{display:flex;flex-direction:column;gap:10px\}\
+    .row\{display:flex;gap:8px;align-items:center\}\
+    .btn\{padding:10px 12px;border-radius:10px;border:0;background:var(--accent);color:white;cursor:pointer;font-weight:600\}\
+    .btn.ghost\{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)\}\
+    .small\{padding:8px 10px;font-size:13px\}\
+    .results\{background:var(--glass);padding:12px;border-radius:10px;min-height:120px;color:#e6eef8;border:1px solid rgba(255,255,255,0.03)\}\
+    .group\{padding:8px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.02);margin-bottom:8px\}\
+    .name\{display:inline-block;padding:6px 8px;border-radius:6px;margin:4px 4px 0 0;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)\}\
+    .picker\{font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;height:60px\}\
+    .highlight\{background:linear-gradient(90deg, rgba(59,130,246,0.18), rgba(59,130,246,0.08));border:1px solid rgba(59,130,246,0.22);\}\
+    footer\{margin-top:16px;color:var(--muted);font-size:13px\}\
+    .options\{display:flex;gap:8px;align-items:center\}\
+    input[type=number],input[type=text],select\{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit\}\
+    @media (max-width:880px)\{.grid\{grid-template-columns:1fr;\}.controls\{order:2\}\}\
+  </style>\
+</head>\
+<body>\
+  <div class="wrap">\
+    <header>\
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2L15 8H9L12 2Z" fill="#60a5fa" opacity="0.9"></path><path d="M5 22L12 12L19 22H5Z" fill="#2563eb"></path></svg>\
+      <div>\
+        <h1>Di\'e1k Randomizer \'97 egyf\'e1jl\'fa HTML</h1>\
+        <p class="lead">Illeszd be a neveket soronk\'e9nt. Haszn\'e1ld a gombokat: felkever\'e9s, csoportos\'edt\'e1s, kisorsol\'e1s.</p>\
+      </div>\
+    </header>\
+\
+    <div class="grid">\
+      <div>\
+        <label for="names">Nevek (egy n\'e9v soronk\'e9nt)</label>\
+        <textarea id="names" placeholder="P\'e9lda:\\nKov\'e1cs Anna\\nNagy Bence\\nT\'f3th Csilla\\n..."></textarea>\
+\
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">\
+          <button id="shuffleBtn" class="btn small">Nevek felkever\'e9se</button>\
+          <button id="pickBtn" class="btn small">Kisorsol egy tanul\'f3t</button>\
+          <button id="clearBtn" class="btn ghost small">T\'f6r\'f6l</button>\
+          <button id="sampleBtn" class="btn ghost small">Minta nevek</button>\
+        </div>\
+\
+        <h3 style="margin-top:16px;margin-bottom:8px">Eredm\'e9ny / L\'e1that\'f3 lista</h3>\
+        <div id="resultList" class="results" aria-live="polite"></div>\
+\
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">\
+          <button id="copyList" class="btn small ghost">M\'e1sol\'e1s v\'e1g\'f3lapra</button>\
+          <button id="downloadList" class="btn small">Let\'f6lt\'e9s TXT</button>\
+        </div>\
+\
+      </div>\
+\
+      <aside class="controls">\
+        <div style="background:var(--card);padding:12px;border-radius:10px">\
+          <label>Csoportos\'edt\'e1s</label>\
+          <div class="row" style="margin-top:8px">\
+            <input id="groupMode" type="radio" name="groupMode" value="byNumber" checked /> <label style="margin-left:6px">Csoportok sz\'e1ma</label>\
+            <input id="groupMode2" type="radio" name="groupMode" value="bySize" style="margin-left:10px"/> <label style="margin-left:6px">Csoportm\'e9ret</label>\
+          </div>\
+\
+          <div class="row" style="margin-top:10px">\
+            <input id="numGroups" type="number" min="1" value="3" style="width:90px" />\
+            <input id="groupSize" type="number" min="1" value="3" style="width:90px;display:none" />\
+            <label style="margin-left:6px;color:var(--muted);font-size:13px">(marad\'e9kot egyenletesen osztja)</label>\
+          </div>\
+\
+          <div style="display:flex;gap:8px;margin-top:10px">\
+            <button id="groupBtn" class="btn small">Csoportos\'edt</button>\
+            <button id="groupShuffleBtn" class="btn small ghost">Felkever + Csoportos\'edt</button>\
+          </div>\
+\
+        </div>\
+\
+        <div style="background:var(--card);padding:12px;border-radius:10px">\
+          <label>Kisorsol\'e1s (quick pick)</label>\
+          <div style="margin-top:8px" class="picker" id="pickerArea">\'97</div>\
+          <div style="display:flex;gap:8px;margin-top:10px">\
+            <button id="pickAgain" class="btn small ghost">\'dajrasorsol</button>\
+            <button id="animatePick" class="btn small">Anim\'e1lt sorsol\'e1s</button>\
+          </div>\
+        </div>\
+\
+        <div style="background:var(--card);padding:12px;border-radius:10px">\
+          <label>Egy\'e9b</label>\
+          <div class="row" style="margin-top:8px">\
+            <button id="shuffleSeeded" class="btn ghost small">Determinista felkever\'e9s (seed)</button>\
+            <input id="seedInput" type="text" placeholder="seed (opcion\'e1lis)" style="flex:1;margin-left:6px" />\
+          </div>\
+          <div style="margin-top:8px;display:flex;gap:8px">\
+            <button id="clearHighlights" class="btn small ghost">Kiemel\'e9s t\'f6rl\'e9se</button>\
+          </div>\
+        </div>\
+\
+      </aside>\
+    </div>\
+\
+    <footer>Haszn\'e1lat: illeszd be a neveket, majd nyomj gombot. A csoportos\'edt\'e1sn\'e1l v\'e1laszthatsz csoportok sz\'e1m\'e1t vagy csoportm\'e9retet.</footer>\
+  </div>\
+\
+  <script>\
+    // Helpers\
+    function parseNames()\{\
+      const text = document.getElementById('names').value;\
+      const arr = text.split(/\\r?\\n/).map(s=>s.trim()).filter(s=>s);\
+      return arr;\
+    \}\
+\
+    function renderList(arr)\{\
+      const el = document.getElementById('resultList');\
+      if(!arr.length) \{ el.innerHTML = '<i style="color:var(--muted)">Nincsenek nevek</i>'; return \}\
+      el.innerHTML = arr.map(n=>`<span class="name" data-name="$\{escapeHtml(n)\}">$\{escapeHtml(n)\}</span>`).join('');\
+    \}\
+\
+    function escapeHtml(s)\{ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;') \}\
+\
+    // Fisher-Yates\
+    function shuffleArray(a, rng=Math.random)\{\
+      const arr = a.slice();\
+      for(let i=arr.length-1;i>0;i--)\{\
+        const j = Math.floor(rng()*(i+1));\
+        [arr[i],arr[j]] = [arr[j],arr[i]];\
+      \}\
+      return arr;\
+    \}\
+\
+    // Deterministic RNG from seed (xorshift32-like)\
+    function seededRng(seed)\{\
+      let h = 2166136261 >>> 0;\
+      for(let i=0;i<seed.length;i++) h = Math.imul(h ^ seed.charCodeAt(i), 16777619) >>> 0;\
+      return function()\{ h += 0x6D2B79F5; let t = Math.imul(h ^ (h >>> 15), 1 | h); t ^= t + Math.imul(t ^ (t >>> 7), 61 | t); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; \};\
+    \}\
+\
+    // Grouping: mode 'byNumber' (num groups) or 'bySize' (size per group)\
+    function groupInto(arr, mode='byNumber', value=3)\{\
+      const result = [];\
+      if(!arr.length) return result;\
+      if(mode==='byNumber')\{\
+        const k = Math.max(1,Math.floor(Number(value)||1));\
+        // distribute approximately evenly\
+        for(let i=0;i<k;i++) result.push([]);\
+        arr.forEach((name,i)=> result[i%k].push(name));\
+      \} else \{\
+        const size = Math.max(1,Math.floor(Number(value)||1));\
+        for(let i=0;i<arr.length;i+=size) result.push(arr.slice(i,i+size));\
+      \}\
+      return result;\
+    \}\
+\
+    function renderGroups(groups)\{\
+      const el = document.getElementById('resultList');\
+      if(!groups.length) \{ el.innerHTML = '<i style="color:var(--muted)">Nincsenek csoportok</i>'; return \}\
+      el.innerHTML = groups.map((g,idx)=>`<div class="group"><strong>Csoport $\{idx+1\} ($\{g.length\})</strong><div style="margin-top:6px">$\{g.map(n=>`<span class="name">$\{escapeHtml(n)\}</span>`).join('')\}</div></div>`).join('');\
+    \}\
+\
+    // Pick random\
+    function pickRandom(arr, rng=Math.random)\{ if(!arr.length) return null; return arr[Math.floor(rng()*arr.length)]; \}\
+\
+    // UI wiring\
+    document.getElementById('shuffleBtn').addEventListener('click', ()=>\{\
+      const names = parseNames();\
+      const shuffled = shuffleArray(names);\
+      renderList(shuffled);\
+    \});\
+\
+    document.getElementById('sampleBtn').addEventListener('click', ()=>\{\
+      const sample = ['Kov\'e1cs Anna','Nagy Bence','T\'f3th Csilla','Horv\'e1th D\'e1niel','Szab\'f3 Emese','Moln\'e1r Gerg\uc0\u337 ','Fekete Iv\'e1n','Papp J\'falia','Balogh M\'e1rk','Varga No\'e9mi'];\
+      document.getElementById('names').value = sample.join('\\n');\
+      renderList(sample);\
+    \});\
+\
+    document.getElementById('clearBtn').addEventListener('click', ()=>\{ document.getElementById('names').value=''; renderList([]); document.getElementById('pickerArea').textContent='\'97'; \});\
+\
+    document.getElementById('copyList').addEventListener('click', async ()=>\{\
+      const text = parseNames().join('\\n') || document.getElementById('resultList').innerText;\
+      try\{ await navigator.clipboard.writeText(text); alert('M\'e1solva a v\'e1g\'f3lapra'); \}catch(e)\{ prompt('M\'e1sold ki k\'e9zzel:', text); \}\
+    \});\
+\
+    document.getElementById('downloadList').addEventListener('click', ()=>\{\
+      const text = parseNames().join('\\n') || document.getElementById('resultList').innerText;\
+      const blob = new Blob([text],\{type:'text/plain;charset=utf-8'\});\
+      const url = URL.createObjectURL(blob);\
+      const a = document.createElement('a'); a.href=url; a.download='nevek.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);\
+    \});\
+\
+    document.getElementById('groupBtn').addEventListener('click', ()=>\{\
+      const names = parseNames();\
+      const mode = document.querySelector('input[name=groupMode]:checked').value;\
+      const value = mode==='byNumber' ? Number(document.getElementById('numGroups').value) : Number(document.getElementById('groupSize').value);\
+      const groups = groupInto(names, mode, value);\
+      renderGroups(groups);\
+    \});\
+\
+    document.getElementById('groupShuffleBtn').addEventListener('click', ()=>\{\
+      const names = parseNames();\
+      const shuffled = shuffleArray(names);\
+      const mode = document.querySelector('input[name=groupMode]:checked').value;\
+      const value = mode==='byNumber' ? Number(document.getElementById('numGroups').value) : Number(document.getElementById('groupSize').value);\
+      const groups = groupInto(shuffled, mode, value);\
+      renderGroups(groups);\
+    \});\
+\
+    document.getElementById('pickBtn').addEventListener('click', ()=>\{\
+      const names = parseNames();\
+      const chosen = pickRandom(names);\
+      const area = document.getElementById('pickerArea');\
+      if(!chosen)\{ area.textContent='Nincs n\'e9v'; return \}\
+      area.textContent = chosen;\
+      flashName(chosen);\
+    \});\
+\
+    document.getElementById('pickAgain').addEventListener('click', ()=>\{ document.getElementById('pickBtn').click(); \});\
+\
+    document.getElementById('animatePick').addEventListener('click', ()=>\{\
+      const names = parseNames(); if(!names.length)\{ alert('Illessz be neveket!'); return \}\
+      const seed = document.getElementById('seedInput').value.trim();\
+      const rng = seed ? seededRng(seed) : Math.random;\
+      const area = document.getElementById('pickerArea');\
+      const rounds = Math.min(30, Math.max(8, names.length*2));\
+      let i=0; const order = shuffleArray(names, rng);\
+      const timer = setInterval(()=>\{\
+        area.textContent = order[i % order.length];\
+        i++;\
+        if(i>rounds)\{ clearInterval(timer); const final = order[(i-1) % order.length]; area.textContent = final; flashName(final); \}\
+      \}, 80 + Math.floor(Math.random()*80));\
+    \});\
+\
+    // radio switching for inputs\
+    document.getElementById('groupMode').addEventListener('change', ()=>\{ document.getElementById('numGroups').style.display='inline-block'; document.getElementById('groupSize').style.display='none'; \});\
+    document.getElementById('groupMode2').addEventListener('change', ()=>\{ document.getElementById('numGroups').style.display='none'; document.getElementById('groupSize').style.display='inline-block'; \});\
+\
+    document.getElementById('shuffleSeeded').addEventListener('click', ()=>\{\
+      const seed = document.getElementById('seedInput').value.trim();\
+      const names = parseNames();\
+      if(!names.length)\{ alert('Illessz be neveket!'); return \}\
+      const rng = seed ? seededRng(seed) : Math.random;\
+      const shuffled = shuffleArray(names, rng);\
+      renderList(shuffled);\
+    \});\
+\
+    document.getElementById('clearHighlights').addEventListener('click', ()=>\{\
+      const spans = document.querySelectorAll('#resultList .name'); spans.forEach(s=>s.classList.remove('highlight'));\
+    \});\
+\
+    // helper to highlight the chosen name in result list\
+    function flashName(name)\{\
+      // find matching spans anywhere\
+      const spans = Array.from(document.querySelectorAll('.name')).filter(s=>s.dataset.name? s.dataset.name===name : s.textContent===name);\
+      if(spans.length)\{\
+        spans.forEach(s=>s.classList.remove('highlight'));\
+        const s = spans[0];\
+        s.classList.add('highlight');\
+        s.scrollIntoView(\{behavior:'smooth',block:'center'\});\
+      \}\
+    \}\
+\
+    // Allow clicking a name in result list to pick it\
+    document.getElementById('resultList').addEventListener('click',(e)=>\{\
+      const t = e.target.closest('.name'); if(!t) return;\
+      document.getElementById('pickerArea').textContent = t.textContent;\
+      flashName(t.textContent);\
+    \});\
+\
+    // init: empty state\
+    renderList([]);\
+  </script>\
+</body>\
+</html>\
+}
